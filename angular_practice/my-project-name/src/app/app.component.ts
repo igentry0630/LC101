@@ -6,9 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title: string = 'my-project-name';
-  name: string = 'Isaac Gentry';
-  pizzaList: string[] = ['Imos', 'Dominoes', 'Little Caesars', 'Pizza Hut'];
+  // title = 'my-project-name';
+  name = 'Isaac Gentry';
+  pizzaList = ['Imos', 'Dominoes', 'Little Caesars', 'Pizza Hut'];
   rectangle = {
     length: 5,
     width: 6,
