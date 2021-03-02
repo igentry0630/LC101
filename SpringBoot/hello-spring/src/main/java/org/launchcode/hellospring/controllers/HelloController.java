@@ -22,27 +22,50 @@ public class HelloController {
 
     // lives at /hello/hello
     //Handles request of the form /hello?name=LaunchCode
-    @RequestMapping(method = {RequestMethod.GET, RequestMethod.POST})
-        public String helloWithQueryParam(@RequestParam String name) {
-        return "Hello, " + name + "!";
+    @RequestMapping(method = {RequestMethod.GET, RequestMethod.POST}, value="hello")
+    public String helloWithQueryParam(@RequestParam String name, @RequestParam String language) {
+        String properGreeting = HelloController.createMessage(name, language);
+        return "<h3 style='color:blue;'>" + properGreeting + "</h3>";
+
     }
 
     // Handles request of the form /hello/LaunchCode
-    @GetMapping("{name}")
-        public String helloWithPathParamm(@PathVariable String name) {
-        return "Hello " + name + "!";
-    }
+    @GetMapping("hello/{name}")
+    public String helloWithQueryParam2(@PathVariable String name) { return "Hello " + name + "!";}
+
     // lives at /hello/form
     @GetMapping("form")
         public String helloForm() {
         return  "<html>"+
                 "<body>"+
                 "<form action='hello' method='post'>"+ //submit a request to /hello
-                "<input type ='text' name='name'>"+
-                "<input type ='submit' value='Greet me!'>"+
+                "<input type ='text' name='name' />"+
+                "<select name='language'>" +
+                    "<option value='English'>English</option>" +
+                    "<option value='Spanish'>Spanish</option>" +
+                    "<option value='French'>French</option>" +
+                    "<option value='Italian'>Italian</option>"+
+                    "<option value='German'>German</option>"+
+                "</select>"+
+                "<input type ='submit' value='Greet me!' />" +
                 "</form>"+
-                "</body>"+
                 "</html>";
+}
+public static String createMessage(String name, String language) {
+        switch(language) {
+
+            case"Spanish":
+                return" Hola, "+ name;
+            case"French":
+                return" Bonjour, "+ name;
+            case"Italian":
+                return" Ciao, "+ name;
+            case"German":
+                return" Hallo, "+ name;
+            default:
+                return "Hello, "+ name;
+
+        }
 }
 }
 
